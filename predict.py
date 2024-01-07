@@ -42,7 +42,7 @@ class Predictor(BasePredictor):
             default="RealisticVision",
         ),
         guidance_scale: float = Input(
-            description="CFG. SDXLTurbo should be 0.0 -> 1.0", ge=0, le=1, default=7
+            description="CFG. SDXLTurbo should be 0.0 -> 1.0", ge=0, le=20, default=7
         ),
         key: str = Input(description="API key", default="replicate"),
     ) -> Path:
@@ -63,5 +63,5 @@ class Predictor(BasePredictor):
         )
         base64 = response.json()
         image = base64_to_pil_image(base64)
-        image.save("output.png")
-        return [Path("output.png")]
+        image.save("/tmp/output.png")
+        return Path("/tmp/output.png")
