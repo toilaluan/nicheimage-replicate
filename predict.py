@@ -22,10 +22,6 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        image: Path = Input(description="Grayscale input image"),
-        scale: float = Input(
-            description="Factor to scale image by", ge=0, le=10, default=1.5
-        ),
         prompt: str = Input(description="Prompt to generate image from"),
         seed: int = Input(description="Seed for random number generator", default=0),
         width: int = Input(
@@ -55,7 +51,6 @@ class Predictor(BasePredictor):
             "model_name": model_name,
             "prompt": prompt,
             "pipeline_params": {
-                "guidance_scale": scale,
                 "seed": seed,
                 "width": width,
                 "height": height,
